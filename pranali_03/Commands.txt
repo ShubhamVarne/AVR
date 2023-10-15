@@ -1,0 +1,28 @@
+Command Used for flashing on ATmega328p
+
+C:\Users\Omkar\AppData\Local\Arduino15\packages\arduino\tools\avrdude\6.3.0-arduino17\bin\avrdude.exe -C C:\Users\Omkar\AppData\Local\Arduino15\packages\arduino\tools\avrdude\6.3.0-arduino17\etc\avrdude.conf -v -p atmega328p -c stk500v1 -P COM4 -b 19200 -U flash:w:a.hex:i
+
+In generic format 
+1. <path_of_avrdude.exe_file> 
+2. -C(To specify which avrdude.conf file we use) <path_of_avrdude.conf_file> 
+3. -v(To enable verbose output)
+4. -p(Partname of<controller) <atmega328p> 
+5. -c(Programmer ID) <stk500v1> 
+6. -P(Port Name) <COM4>
+7. -b(baud rate) <19200> 
+8. -U(Memory operation command with systax) 
+	<Memory_Region> : <r/w/v_operation> : <file_name_with_path> : <i->intel Hex, e->elf, m->exact values>
+	
+	Memory_region can be : flash, eeprom, lfuse, hfuse, efuse
+	
+Command to compile and link .c file and generate machine language file
+
+avr-gcc --mmcu=atmega328p file_name.c -o output_file_name
+
+Command to copy .out file into AVR compatible format
+
+avr-objcopy 
+1. -O(Output format) <ihex> (used for intel hex format)
+2. -j(specifiy which sections of code should get copied) <-j .text -j .data>
+3. output_file_name <a.out>
+4. specify name of hex file you want <ihex>
